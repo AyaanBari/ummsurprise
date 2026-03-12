@@ -184,20 +184,19 @@ function initNoButton() {
     noBtn.style.transform = "translate(0,0)";
   };
 
-  // Make it basically unclickable
-  noBtn.addEventListener("mouseenter", () => {
+  // Make it basically unclickable (works for mouse + touch)
+  noBtn.addEventListener("pointerenter", () => {
     moveAway();
     toast("Hehe", "That “No” is too shy to be clicked.");
   });
-  noBtn.addEventListener("focus", () => moveAway());
-  row.addEventListener("mouseleave", () => reset());
-  noBtn.addEventListener("click", (e) => {
+  noBtn.addEventListener("pointerdown", (e) => {
     e.preventDefault();
     moveAway();
+    toast("Nope", "You can’t press that one.");
   });
-
-  // If user tries to tap on mobile
-  noBtn.addEventListener("touchstart", (e) => {
+  noBtn.addEventListener("focus", () => moveAway());
+  row.addEventListener("pointerleave", () => reset());
+  noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveAway();
   });
@@ -370,6 +369,7 @@ function initMusic() {
 
   const KEY = "ayaan_tarana_music_on";
   let on = true; // default on
+  let started = false;
 
   const setBtn = () => {
     btn.classList.toggle("isOn", on);
@@ -377,11 +377,32 @@ function initMusic() {
     btn.textContent = on ? "♪ Pause" : "♪ Pause";
   };
 
+  const waitForMetadata = () =>
+    new Promise((resolve) => {
+      if (Number.isFinite(audio.duration) && audio.duration > 0) return resolve();
+      const done = () => {
+        audio.removeEventListener("loadedmetadata", done);
+        audio.removeEventListener("canplay", done);
+        resolve();
+      };
+      audio.addEventListener("loadedmetadata", done, { once: true });
+      audio.addEventListener("canplay", done, { once: true });
+      // In case the browser never fires (rare), resolve anyway
+      window.setTimeout(done, 1200);
+    });
+
   async function tryPlay() {
     try {
-      audio.currentTime = 45;
-      audio.volume = 0;
+      await waitForMetadata();
+      const seekTo = 45;
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = Math.min(seekTo, Math.max(0, audio.duration - 1));
+      } else {
+        audio.currentTime = seekTo;
+      }
+      audio.volume = 0.0;
       await audio.play();
+      started = true;
       // fade in
       const target = 0.85;
       const steps = 20;
@@ -406,7 +427,7 @@ function initMusic() {
     setBtn();
     const ok = await tryPlay();
     if (!ok) {
-      toast("Tap once", "Press ♪ Play again and it’ll start.");
+      toast("Tap once", "Press the ♪ button once to start the song.");
     } else {
       toast("Our song", "Okay… it’s playing.");
     }
@@ -425,19 +446,15 @@ function initMusic() {
     else await turnOn();
   });
 
-  // If user already chose ON previously, start on first interaction.
-  if (on) {
-    setBtn();
-    const once = async () => {
-      document.removeEventListener("pointerdown", once);
-      document.removeEventListener("keydown", once);
-      await tryPlay();
-    };
-    document.addEventListener("pointerdown", once, { once: true });
-    document.addEventListener("keydown", once, { once: true });
-  } else {
-    setBtn();
-  }
+  // GitHub Pages / iOS Safari: audio must start from user gesture.
+  setBtn();
+  const startOnGesture = async () => {
+    if (!on || started) return;
+    const ok = await tryPlay();
+    if (!ok) toast("Song", "Tap the ♪ button to start.");
+  };
+  document.addEventListener("pointerdown", startOnGesture, { passive: true });
+  document.addEventListener("keydown", startOnGesture);
 }
 
 function boot() {
