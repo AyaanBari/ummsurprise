@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0b12" />
+    <title>Ayaan ✦ Tarana</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <audio id="bgm" preload="auto" loop>
+      <source src="./assets/ishq-bulaava.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="bg" aria-hidden="true">
+      <div class="grain"></div>
+      <div class="aurora a1"></div>
+      <div class="aurora a2"></div>
+      <div class="aurora a3"></div>
+      <div class="hearts" id="hearts"></div>
+      <div class="sparkles" id="sparkles"></div>
+    </div>
+
+    <button
+      class="musicChip"
+      type="button"
+      id="musicToggle"
+      aria-pressed="false"
+      aria-label="Pause or play our song"
+    >
+      ♪ Pause
+    </button>
+
+    <main class="app" id="app" aria-live="polite">
+      <!-- PAGE 1 -->
+      <section class="page isActive" data-page="home" aria-label="Home">
+        <div class="hero">
+          <div class="heroLeft">
+            <p class="pill">
+              <span class="dot"></span>
+              Tarana, this is for you
+            </p>
+            <h1 class="title">
+              Tarana,
+              <span class="titleAccent">this is our little universe</span>
+            </h1>
+            <p class="sub">
+              It’s me — Ayaan (Aloobhujiya). I made this tiny world because I
+              miss you, and because you’re my favorite feeling.
+            </p>
+
+            <div class="ctaRow">
+              <button class="cta primary bump" type="button" data-flow="card">
+                Open my card for you
+              </button>
+            </div>
+
+            <div class="songNote">
+              <p class="songLine">
+                Our song is playing in the background… press the <b>♪ Play</b>
+                button on top if it’s silent.
+              </p>
+            </div>
+          </div>
+
+          <div class="heroRight" aria-hidden="true">
+            <div class="orb o1"></div>
+            <div class="orb o2"></div>
+            <div class="orb o3"></div>
+            <div class="polaroids">
+              <div class="pol p1">
+                <div class="polInner">
+                  <div class="polPic"></div>
+                  <div class="polCap">my babuu</div>
+                </div>
+              </div>
+              <div class="pol p2">
+                <div class="polInner">
+                  <div class="polPic"></div>
+                  <div class="polCap">like forever ∞</div>
+                </div>
+              </div>
+              <div class="pol p3">
+                <div class="polInner">
+                  <div class="polPic"></div>
+                  <div class="polCap">kuchupuchu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quoteRow">
+          <article class="quoteCard reveal" data-reveal>
+            <h2 class="quoteTitle">Things I love about you</h2>
+            <p class="quoteText">
+              Your voice. Your softness. The way you care. The way you make my
+              normal days feel special. The way you feel like home, even from
+              far away.
+            </p>
+          </article>
+          <article class="quoteCard reveal" data-reveal>
+            <h2 class="quoteTitle">Little promises (from your boy)</h2>
+            <p class="quoteText">
+              I’ll show up. I’ll listen. I’ll choose you on the easy days and
+              the hard days. I’ll keep you safe in my heart… and in my life.
+            </p>
+          </article>
+        </div>
+
+        <footer class="foot">
+          <span class="footHint">For Tarana — from Ayaan, always.</span>
+        </footer>
+      </section>
+
+      <!-- PAGE 2 -->
+      <section class="page" data-page="card" aria-label="Handmade card">
+        <div class="cardStage">
+          <div class="cardIntro">
+            <h2 class="pageTitle">A little handmade card</h2>
+            <p class="pageSub">
+              Do it slowly, okay? Click each step and let it unfold.
+            </p>
+          </div>
+
+          <div class="envelopeWrap" id="envelopeWrap">
+            <div class="envelope" id="envelope" aria-hidden="true">
+              <div class="envBack"></div>
+              <div class="envFront"></div>
+              <div class="envFlap" id="envFlap"></div>
+              <div class="seal" id="seal">
+                <span class="sealText">A ✦ T</span>
+              </div>
+              <div class="notePeek" id="notePeek">
+                <div class="noteTop"></div>
+              </div>
+            </div>
+
+            <div class="cardControls">
+              <div class="stepper" aria-label="Card steps">
+                <button class="stepBtn bump" type="button" data-step="1">
+                  1) Break the seal (gently)
+                </button>
+                <button class="stepBtn" type="button" data-step="2" disabled>
+                  2) Open it
+                </button>
+                <button class="stepBtn" type="button" data-step="3" disabled>
+                  3) Pull my card out
+                </button>
+                <button class="stepBtn" type="button" data-step="4" disabled>
+                  4) Read what I mean
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="handCard" id="handCard" hidden>
+            <div class="paper">
+              <div class="paperFold paperFold-top" id="paperFoldTop">
+                <div class="paperInside">
+                  <p class="foldLabel">open me</p>
+                </div>
+              </div>
+              <div class="paperCore" id="paperCore">
+                <div class="paperTop">
+                  <div class="scribble" aria-hidden="true"></div>
+                  <h3 class="paperTitle">For Tarana</h3>
+                  <p class="paperSub">from Ayaan (Aloobhujiya), your boy</p>
+                </div>
+                <div class="paperBody">
+                  <p class="cardLine" data-line="1">
+                    You’re my calm, my chaos, my home.
+                  </p>
+                  <p class="cardLine" data-line="2">
+                    I want to choose you in every season.
+                  </p>
+                  <p class="cardLine" data-line="3">
+                    And I want our “like forever” to be real.
+                  </p>
+                </div>
+                <div class="paperActions">
+                  <button class="cta primary bump" type="button" id="revealNext">
+                    Write the next line
+                  </button>
+                  <button class="cta ghost" type="button" id="sprinkle">
+                    Add extra hearts
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3 -->
+      <section class="page" data-page="proposal" aria-label="Proposal">
+        <div class="proposalWrap">
+          <div class="proposalHeader reveal" data-reveal>
+            <h2 class="pageTitle">One question, my love</h2>
+            <p class="pageSub">
+              No big speeches. Just me, being real with you.
+            </p>
+          </div>
+
+          <div class="stepsRow">
+            <article class="stepCard reveal" data-reveal data-step-tile="1">
+              <h3 class="stepTitle">1. Today</h3>
+              <p class="stepText">
+                Today I’m just asking you to look at this screen and feel how
+                much I adore you.
+              </p>
+            </article>
+            <article class="stepCard reveal" data-reveal data-step-tile="2">
+              <h3 class="stepTitle">2. A little later</h3>
+              <p class="stepText">
+                  When we meet i will give you kissi , my kuchu puchu , mera baby , mera sabh kuch muaah...😘😘😘😘😘😘
+              </p>
+            </article>
+            <article class="stepCard reveal" data-reveal data-step-tile="3">
+              <h3 class="stepTitle">3. Forever yours</h3>
+              <p class="stepText">
+                And after that… I want you in every plan, every festival, every
+                boring weekday. All of it.
+                I will be forever yours. my love 😘....
+              </p>
+            </article>
+          </div>
+
+          <div class="rings" aria-hidden="true">
+            <div class="ring r1"></div>
+            <div class="ring r2"></div>
+            <div class="ring r3"></div>
+          </div>
+
+          <div class="questionCard" id="questionCard">
+            <div class="qTop">
+              <div class="badge">Ayaan ✦ Tarana</div>
+              <div class="pulse" aria-hidden="true"></div>
+            </div>
+            <h3 class="qTitle">Will you be my forever?</h3>
+            <p class="qSub">
+              Say yes and let the whole sky celebrate you. (And don’t worry…
+              “No” is very shy.)
+            </p>
+
+            <div class="btnRow" id="btnRow">
+              <button class="bigBtn yes bump" type="button" id="yesBtn">
+                Yes
+              </button>
+              <button class="bigBtn no bump" type="button" id="noBtn">
+                No
+              </button>
+            </div>
+
+            <div class="after" id="after" hidden>
+              <h4 class="afterTitle">Yay. It’s official. my love 😘....</h4>
+              <p class="afterText">
+                You + me = a lifetime of hugs, kisses, and “mine mine mine” 😘😘😘😘😘😘.
+              </p>
+              <div class="afterActions">
+                <button class="cta primary" type="button" id="replay">
+                  Replay celebration
+                </button>
+                <a
+                  class="cta ghost"
+                  id="openMarch15"
+                  href="#"
+                  onclick="return false"
+                  >Open on 15th March</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toasts" id="toasts" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
