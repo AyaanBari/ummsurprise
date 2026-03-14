@@ -229,8 +229,31 @@ function initYesFlow() {
 
   replay?.addEventListener("click", () => celebrate());
 
-  openMarch15?.addEventListener("click", () => {
-    toast("Not yet", "Open on 15th March.");
+  openMarch15?.addEventListener("click", (e) => {
+    // If dev forgot to set link, keep her on this page
+    const href = openMarch15.getAttribute("href") || "";
+    if (!href || href === "PASTE_HTTP_LINK_HERE") {
+      e.preventDefault();
+      toast("Add your link", "Paste your http link into the 15th March button.");
+      return;
+    }
+    // Stop background music when she goes to the next surprise
+    const audio = qs("#bgm");
+    const chip = qs("#musicToggle");
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    if (chip) {
+      chip.classList.remove("isOn");
+      chip.setAttribute("aria-pressed", "false");
+      chip.textContent = "♪ Pause";
+    }
+    try {
+      localStorage.setItem("ayaan_tarana_music_on", "0");
+    } catch {
+      // ignore
+    }
   });
 }
 
