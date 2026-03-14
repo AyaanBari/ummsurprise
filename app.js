@@ -230,10 +230,10 @@ function initYesFlow() {
   replay?.addEventListener("click", () => celebrate());
 
   openMarch15?.addEventListener("click", (e) => {
+    e.preventDefault();
     // If dev forgot to set link, keep her on this page
     const href = openMarch15.getAttribute("href") || "";
     if (!href || href === "PASTE_HTTP_LINK_HERE") {
-      e.preventDefault();
       toast("Add your link", "Paste your http link into the 15th March button.");
       return;
     }
@@ -254,6 +254,8 @@ function initYesFlow() {
     } catch {
       // ignore
     }
+    // Open the surprise page after pausing music
+    window.open(href, "_blank", "noopener");
   });
 }
 
